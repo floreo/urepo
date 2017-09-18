@@ -1,8 +1,42 @@
 #!/bin/bash
+set -e
 
-set -u
+. /usr/share/debconf/confmodule
+db_version 2.0
 
-# let's load urepo config file ...
+db_get urepo/UREPO_MENU
+
+if [ "${RET}" == "true" ] ;
+then
+    _UREPO_PARAMETERS=(
+        "UREPO_ROOT"
+        "UREPO_UPLOAD_DIR"
+        "UREPO_LOG"
+        "UREPO_ALLOW_DELETE_IPS"
+        "DEB_REPO_ROOT"
+        "DEB_RELEASES"
+        "DEB_ARCHITECTURES"
+        "DEB_COMPONENTS"
+        "RPM_REPO_ROOT"
+        "RPM_RELEASES"
+        "RPM_ARCHITECTURES"
+        "RPM_COMPONENTS"
+    )
+    > /etc/urepo/urepo.conf
+    for _parameter in ${_UREPO_PARAMETERS[@]}
+    do
+         db_get urepo/${_parameter}
+         echo "${_parameter}=\"${RET}\"" >>/etc/urepo/urepo.conf
+    done
+else
+    if [ ! -s "/etc/urepo/urepo.conf"  ] ;
+    then
+        :
+        #        cp -a /usr/share/doc/urepo/urepo.conf
+    fi
+fi
+
+# let's load urepo config file previously created ...
 . /etc/urepo/urepo.conf
 # ... and functions
 . $UREPO_ROOT/cgi/urepo-functions
@@ -25,7 +59,7 @@ for release in $RPM_RELEASES; do
 done
 # let's create deb directory hierarchy
 mkdir -p $DEB_REPO_ROOT && cd $DEB_REPO_ROOT && chmod -R +r .
-for dist in $DEB_CODENAMES; do
+for dist in $DEB_RELEASES; do
     options=""
     for branch in $DEB_COMPONENTS; do
         options+="${options:+, }\"$branch\""
@@ -60,3 +94,5 @@ rm -f /etc/nginx/sites-enabled/default
 ln -nsf /etc/urepo/urepo-nginx /etc/nginx/sites-enabled/urepo-nginx
 # and restart nginx
 /etc/init.d/nginx restart
+
+exit 0

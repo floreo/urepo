@@ -1,0 +1,64 @@
+Template: urepo/UREPO_MENU
+Default: false 
+Type: boolean
+Description: Do you want to follow the menu ?
+
+Template: urepo/UREPO_ROOT
+Default: /var/urepo
+Type: string
+Description: The root folder for your urepo
+
+Template: urepo/UREPO_UPLOAD_DIR
+Default: upload
+Type: string
+Description: Name of the urepo upload directory
+
+Template: urepo/UREPO_LOG
+Default: /var/log/urepo/urepo.log
+Type: string
+Description: urepo's log file
+
+Template: urepo/UREPO_ALLOW_DELETE_IPS
+Type: string
+Description: IP(s) allowed to delete uploaded package(s)
+
+Template: urepo/DEB_REPO_ROOT
+Default: /var/urepo/deb
+Type: string
+Description: The root folder for your DEB urepo package(s)
+
+Template: urepo/DEB_RELEASES
+Default: precise trusty xenial
+Type: string
+Description: Releases' name for Debian/Ubuntu
+
+Template: urepo/DEB_ARCHITECTURES
+Default: amd64 i386
+Type: string
+Description: Architectures that you support
+
+Template: urepo/DEB_COMPONENTS
+Default: stable testing tebibox
+Type: string
+Description: Components for Debian/Ubuntu
+
+Template: urepo/RPM_REPO_ROOT
+Default: /var/urepo/rpm
+Type: string
+Description: The root folder for your RPM urepo package(s)
+
+Template: urepo/RPM_RELEASES
+Default: centos5 centos6
+Type: string
+Description: Releases' name for CentOS
+
+Template: urepo/RPM_ARCHITECTURES
+Default: i386 x86_64 SRPMS
+Type: string
+Description: Architectures that you support
+
+Template: urepo/RPM_COMPONENTS
+Default: stable testing
+Type: string
+Description: Components for CentOS
+

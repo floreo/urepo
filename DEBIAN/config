@@ -1,0 +1,37 @@
+#!/bin/bash
+set -e
+
+. /usr/share/debconf/confmodule
+db_version 2.0
+
+# menu
+db_input high urepo/UREPO_MENU
+db_go || true
+db_get urepo/UREPO_MENU
+
+if [ "${RET}" == "true" ] ;
+then
+    # configure urepo
+    db_input high urepo/UREPO_ROOT
+#    echo "lil"
+    db_input high urepo/UREPO_UPLOAD_DIR
+    db_input high urepo/UREPO_LOG
+    db_input high urepo/UREPO_ALLOW_DELETE_IPS
+
+    # configure DEB
+    db_input high urepo/DEB_REPO_ROOT
+    db_input high urepo/DEB_RELEASES
+    db_input high urepo/DEB_ARCHITECTURES
+    db_input high urepo/DEB_COMPONENTS
+     
+    # configure RPM
+    db_input high urepo/RPM_REPO_ROOT
+    db_input high urepo/RPM_RELEASES
+    db_input high urepo/RPM_ARCHITECTURES
+    db_input high urepo/RPM_COMPONENTS
+
+    # display questions and moving on
+    db_go || true
+fi
+
+exit 0

@@ -68,7 +68,7 @@ cd urepo
 
 Now we'll pre-configure your urepo before to build it, open **etc/urepo/urepo.conf**, you can define:
 + DEB
-  + **DEB_CODENAMES**: [Debian](https://en.wikipedia.org/wiki/Debian_version_history)/[Ubuntu](https://en.wikipedia.org/wiki/Ubuntu_(operating_system)#Releases) releases; it can be, jessie, stretch, etc ...
+  + **DEB_RELEASES**: [Debian](https://en.wikipedia.org/wiki/Debian_version_history)/[Ubuntu](https://en.wikipedia.org/wiki/Ubuntu_(operating_system)#Releases) releases; it can be, jessie, stretch, etc ...
   + **DEB_COMPONENTS**: tweaks of the release; it can be stable, testing, etc ...
 
 + RPM
@@ -148,7 +148,7 @@ Urepo-upload is build by running build-urepo-upload.sh, which creates both .deb 
 Do as follow:
 
 ```
-echo 'deb [trusted=yes] http://myurepo.server/deb {DEB_CODENAMES} {DEB_COMPONENTS}' > /etc/apt/sources.list.d/myurepo.list
+echo 'deb [trusted=yes] http://myurepo.server/deb {DEB_RELEASES} {DEB_COMPONENTS}' > /etc/apt/sources.list.d/myurepo.list
 ```
 
 Now you can update and list the packages from you own urepo server:
