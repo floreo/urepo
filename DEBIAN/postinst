@@ -6,8 +6,7 @@ db_version 2.0
 
 db_get urepo/UREPO_MENU
 
-if [ "${RET}" == "true" ] ;
-then
+if [ "${RET}" == "true" ] ; then
     _UREPO_PARAMETERS=(
         "UREPO_ROOT"
         "UREPO_UPLOAD_DIR"
@@ -23,14 +22,12 @@ then
         "RPM_COMPONENTS"
     )
     > /etc/urepo/urepo.conf
-    for _parameter in ${_UREPO_PARAMETERS[@]}
-    do
+    for _parameter in ${_UREPO_PARAMETERS[@]} ; do
          db_get urepo/${_parameter}
          echo "${_parameter}=\"${RET}\"" >>/etc/urepo/urepo.conf
     done
 else
-    if [ ! -s "/etc/urepo/urepo.conf"  ] ;
-    then
+    if [ ! -s "/etc/urepo/urepo.conf"  ] ; then
         :
         #        cp -a /usr/share/doc/urepo/urepo.conf
     fi

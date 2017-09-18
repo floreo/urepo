@@ -19,6 +19,7 @@ Type: string
 Description: urepo's log file
 
 Template: urepo/UREPO_ALLOW_DELETE_IPS
+Default: 127.0.0.1
 Type: string
 Description: IP(s) allowed to delete uploaded package(s)
 
@@ -28,7 +29,7 @@ Type: string
 Description: The root folder for your DEB urepo package(s)
 
 Template: urepo/DEB_RELEASES
-Default: precise trusty xenial
+Default: trusty xenial
 Type: string
 Description: Releases' name for Debian/Ubuntu
 
@@ -38,7 +39,7 @@ Type: string
 Description: Architectures that you support
 
 Template: urepo/DEB_COMPONENTS
-Default: stable testing tebibox
+Default: stable testing
 Type: string
 Description: Components for Debian/Ubuntu
 

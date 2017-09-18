@@ -9,11 +9,9 @@ db_input high urepo/UREPO_MENU
 db_go || true
 db_get urepo/UREPO_MENU
 
-if [ "${RET}" == "true" ] ;
-then
+if [ "${RET}" == "true" ] ; then
     # configure urepo
     db_input high urepo/UREPO_ROOT
-#    echo "lil"
     db_input high urepo/UREPO_UPLOAD_DIR
     db_input high urepo/UREPO_LOG
     db_input high urepo/UREPO_ALLOW_DELETE_IPS

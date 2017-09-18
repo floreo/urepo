@@ -33,7 +33,7 @@ method=${REQUEST_METHOD,,}
 case "$method" in
     post) cmd="$cgi_dir/extract-post-file" ;;
     delete)
-        ( [ ! "$( echo "${UREPO_ALLOW_DELETE_IPS}" | grep "$HTTP_HOST" )" ] && [  "$HTTP_HOST" != "127.0.0.1" ] ) && log "Error: delete from $HTTP_HOST is prohibited" && exit
+        [ ! "$( echo "${UREPO_ALLOW_DELETE_IPS}" | grep -E "\b${HTTP_HOST}\b" )" ] && log "Error: delete from $HTTP_HOST is prohibited" && exit
         cmd=cat
         ;;
     *) log "Error: method \"$method\" is not supported" && exit ;;
